@@ -1,0 +1,36 @@
+model:
+  name: 'osnet_x1_0'
+  pretrained: True
+  load_weights: '/mnt/data/code/deep-person-reid-master/log/market1501/2021-12-11-22-22-19model/model-best.pth.tar'
+
+data:
+  type: 'image'
+  sources: ['market1501']
+  targets: ['market1501']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip', 'random_erase']
+  save_dir: '/mnt/data/code/deep-person-reid-master/log/market1501'
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 60
+  batch_size: 64
+  fixbase_epoch: 5
+  open_layers: ['classifier']
+  lr_scheduler: 'cosine'
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: True
+  evaluate: False
+  eval_freq: 1
+  rerank: False

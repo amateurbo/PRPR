@@ -1,0 +1,39 @@
+model:
+  name: 'osnet_x1_0'
+  pretrained: True
+#  load_weights: '/mnt/data/code/deep-person-reid-master/log_cuhk03/mlr_cuhk03/2021-12-15-16-56-55model/model-best.pth.tar'
+
+#cuhk03:
+#  use_metric_cuhk03: True
+
+data:
+  type: 'image'
+  sources: ['MLR_CUHK03']
+  targets: ['MLR_CUHK03']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip', 'random_erase']
+  save_dir: '/mnt/data/code/deep-person-reid-master/log_cuhk03/mlr_cuhk03_sr_erase+flip'
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 250
+  batch_size: 64
+  fixbase_epoch: 10
+  open_layers: ['classifier']
+  lr_scheduler: 'cosine'
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: True
+  evaluate: False
+  eval_freq: 1
+  rerank: False

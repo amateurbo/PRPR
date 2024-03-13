@@ -1,0 +1,41 @@
+model:
+  name: 'uniformer_small'
+  pretrained: False
+#  resume: '/mnt/data/code/reidlog/MLR_DukeMTMC/x0/2022-03-13-11-25-45model/model.pth.tar-217'
+#  load_weights: '/mnt/data/code/reidlog/test/cuhk03/2022-03-10-17-20-33model/model.pth.tar-226'
+
+
+data:
+  type: 'image'
+  sources: ['MLR_DukeMTMC']
+  targets: ['MLR_DukeMTMC']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip', 'random_erase']
+  save_dir: '/mnt/data/code/reidlog_2/MLR_DukeMTMC/'
+
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 250
+  batch_size: 64
+  fixbase_epoch: 10
+  open_layers: ['classifier']
+  lr_scheduler: 'cosine'
+  save_best_only: False
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: True
+  eval_freq: 1
+  rerank: False
+  start_eval: 200
+  evaluate: False

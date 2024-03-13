@@ -1,0 +1,41 @@
+model:
+  name: 'osnet_x1_0'
+  pretrained: True
+  load_weights: '/mnt/data/code/deep-person-reid-master/logcd/crossdomain/2021-12-15-11-51-35model/model-best.pth.tar'
+#  load_weights: '../premodel/duke/duke.pth.tar-86'
+#  load_weights: '../premodel/duke/mlr_duke.pth.tar-84'
+#  load_weights: '../premodel/duke/hr+mlr_duke.pth.tar-89'
+
+data:
+  type: 'image'
+  sources: ['caviar']
+  targets: ['caviar']
+  height: 256
+  width: 128
+  combineall: False
+
+#  transforms: ['random_flip']
+  save_dir: '/mnt/data/code/reidlog/CAVIAR/x0'
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 60
+  batch_size: 64
+  fixbase_epoch: 5
+  open_layers: ['classifier']
+  lr_scheduler: 'cosine'
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: True
+  eval_freq: 1
+  rerank: False
+  start_eval: 30
+  evaluate: False

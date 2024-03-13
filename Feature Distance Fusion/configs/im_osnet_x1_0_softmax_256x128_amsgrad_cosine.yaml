@@ -1,0 +1,42 @@
+model:
+  name: 'osnet_x1_0'
+  pretrained: True
+#  load_weights: '/mnt/data/code/deep-person-reid-master/log_duke/osnet_x1_0_mlr_dukemtmc_softmax_cosinelr/2021-11-29-17-58-48model/model.pth.tar-84'
+
+data:
+  type: 'image'
+  sources: ['market1501']
+  targets: ['market1501']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip', 'random_erase']
+  save_dir: '/mnt/data/code/deep-person-reid-master/log_test2/osnet_x1_0_550_E_x2_market1501_softmax_cosinelr'
+
+cuhk03:
+  use_metric_cuhk03: True
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 60
+  batch_size: 64
+  fixbase_epoch: 10
+  open_layers: ['classifier']
+  lr_scheduler: 'cosine'
+#  save_best_only: False
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: True
+  evaluate: False
+  eval_freq: 1
+  start_eval: 50
+  rerank: False
+

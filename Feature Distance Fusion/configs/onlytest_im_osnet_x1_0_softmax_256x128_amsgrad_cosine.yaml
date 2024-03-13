@@ -1,0 +1,38 @@
+model:
+  name: 'osnet_x1_0'
+  pretrained: True
+  load_weights: 'log_rcam_market/mlr_market1501/2021-11-26-10-55-19model/model.pth.tar-90'
+
+
+data:
+  type: 'image'
+  sources: ['market1501']
+  targets: ['market1501']
+  height: 256
+  width: 128
+  combineall: False
+
+  transforms: ['random_flip']
+  save_dir: '/mnt/data/code/deep-person-reid-master/log_caviar/osnet_x1_0_sr_caviar_softmax_cosinelr'
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 90
+  batch_size: 64
+  fixbase_epoch: 10
+  open_layers: ['classifier']
+  lr_scheduler: 'cosine'
+
+test:
+  batch_size: 300
+  dist_metric: 'euclidean'
+  normalize_feature: False
+  evaluate: True
+  eval_freq: -1
+  rerank: False

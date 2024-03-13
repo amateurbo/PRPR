@@ -1,0 +1,49 @@
+model:
+  name: 'osnet_x1_0'
+  pretrained: True
+#  load_weights: '/mnt/data/code/reidlog/MLR_Market1501/x2/osnet_x1_0_x2_4400_E_x2_MLR_Market1501_softmax_cosinelr/2022-03-25-00-04-10model/model-best.pth.tar'
+#  load_weights: '/mnt/data/code/reidlog/mlr_market1501_hr_dsx2/x2sr/2022-02-05-14-43-25model/model-best.pth.tar'
+#  load_weights: '/mnt/data/code/reidlog/mlr_market1501_hr_dsx2/hr_dsx2/2022-01-21-18-12-55model/model-best.pth.tar'
+#  load_weights: '/mnt/data/code/reidlog/mlr_market1501_hr_dsx2/hr_dsx2/2022-02-22-16-06-58model/model.pth.tar-250'
+#  load_weights: '/mnt/data/code/reidlog/market1501x5/osnet_x1_0_x5_2500_E_x5_market1501_softmax_cosinelr/2022-02-24-02-07-22model/model-best.pth.tar'
+#  load_weights: '/mnt/data/code/deep-person-reid-master/testlog/2022-01-18-14-57-33model/model-best.pth.tar'
+#cuhk03:
+#  use_metric_cuhk03: True
+
+data:
+  type: 'image'
+  sources: ['MLR_Market1501']
+  targets: ['MLR_Market1501']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip', 'random_erase']
+  root: '/mnt/data/code/Generate_Mlrdataset/MLR_Market1501/split0/mlr_market1501'
+  save_dir: '/mnt/data/code/reidlog/mlr_market1501_CUBIC_ori'
+#  save_dir: '/mnt/data/code/reidlog/mlr_market1501_hr_dsx2'
+#  save_dir: '/mnt/data/code/reidlog_2/market1501/osnet_x1_0_x5_2500_E_x5_market1501_softmax_cosinelr'
+#  save_dir: '/mnt/data/code/reidlog/dist/mlr_market1501_split0'
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 250
+  batch_size: 64
+  fixbase_epoch: 10
+  open_layers: ['classifier']
+  lr_scheduler: 'cosine'
+  save_best_only: True
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: True
+  eval_freq: 1
+  rerank: False
+  start_eval: 200
+  evaluate: False

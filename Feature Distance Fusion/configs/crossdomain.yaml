@@ -1,0 +1,37 @@
+model:
+#  name: 'osnet_x1_0'
+  name: 'osnet_ain_x1_0'
+  pretrained: True
+#  load_weights: '/mnt/data/code/deep-person-reid-master/log/dukemtmcreid_384*192_sr_2800E/2021-12-13-22-25-55model/model-best.pth.tar'
+
+data:
+  type: 'image'
+  sources: ['dukemtmcreid', 'market1501', 'cuhk03', 'msmt17']
+  targets: ['dukemtmcreid']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip', 'color_jitter']
+  save_dir: '/mnt/data/code/deep-person-reid-master/log/dukemtmcreid_384*192_sr_700E'
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 100
+  batch_size: 64
+  fixbase_epoch: 10
+  open_layers: ['classifier']
+  lr_scheduler: 'cosine'
+
+test:
+  batch_size: 300
+  dist_metric: 'cosine'
+  normalize_feature: True
+  evaluate: False
+  eval_freq: 1
+  rerank: False

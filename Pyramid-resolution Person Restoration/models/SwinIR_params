@@ -1,0 +1,21 @@
+Swin classical sr x4
+
+Total params: 11,851,599
+Trainable params: 11,851,599
+Non-trainable params: 0
+
+更改后, 共用before_upsample
+Total params: 12,336,856
+Trainable params: 12,336,856
+Non-trainable params: 0
+
+更改后, 分别使用before_upsample
+Swin classical sr x4
+Total params: 13,316,949
+Trainable params: 13,316,949
+Non-trainable params: 0
+
+更改后, 共同使用before_upsample,加一层卷集跳跃连接
+Total params: 13,220,245
+Trainable params: 13,220,245
+Non-trainable params: 0
