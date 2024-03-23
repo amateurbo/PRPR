@@ -6,3 +6,8 @@ Reconstruct pyramid person images in this module.
 
 ## Feature Distance Fusion
 After extracting feature distances separately, fuse feature distances in this module.
+
+
+
+## Acknowledgement
+Codebase from [SwinIR](https://github.com/JingyunLiang/SwinIR), [Torchreid](https://github.com/KaiyangZhou/deep-person-reid).
