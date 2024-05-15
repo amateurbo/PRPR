@@ -10,6 +10,7 @@ After extracting feature distances separately, fuse feature distances in this mo
 
 The installation can refer to [Torchreid](https://github.com/KaiyangZhou/deep-person-reid).
 
+[Example](https://github.com/amateurbo/PRPR/blob/main/Feature%20Distance%20Fusion/readme.md)
 
 ## Acknowledgement
 Codebase from [SwinIR](https://github.com/JingyunLiang/SwinIR), [Torchreid](https://github.com/KaiyangZhou/deep-person-reid).
