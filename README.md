@@ -7,7 +7,8 @@ Reconstruct pyramid person images in this module.
 ## Feature Distance Fusion
 
 After extracting feature distances separately, fuse feature distances in this module.
-The configuration environment can refer to [Torchreid](https://github.com/KaiyangZhou/deep-person-reid).
+
+The installation can refer to [Torchreid](https://github.com/KaiyangZhou/deep-person-reid).
 
 
 ## Acknowledgement
